@@ -51,4 +51,5 @@ class Cube(Shape):
             [self.w / 2, self.h / 2, self.l / 2],
             [-self.w / 2, self.h / 2, self.l / 2]
         ])
+
         self.shape_points_homogeneous = np.append(self.shape_points, np.ones((len(self.shape_points), 1)), axis=1)

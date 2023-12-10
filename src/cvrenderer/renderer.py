@@ -24,14 +24,14 @@ class Renderer(Draw):
             pts = obj.get_points()
 
             # Change to grey if center below z = 0
-            obj.color = obj.grey if obj.z < 0 else obj.color_static
+            # obj.color = obj.grey if obj.z < 0 else obj.color_static
 
             transformed_pts = M1 @ M2 @ pts
 
             transformed_pts = transformed_pts / transformed_pts[-1, :]
             transformed_pts = transformed_pts[:2, :].T.astype("int")
 
-            self.draw(transformed_pts, obj, draw_points=False)
+            self.draw(transformed_pts, obj, draw_points=True)
 
         k = self.show()
         return k
