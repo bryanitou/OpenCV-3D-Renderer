@@ -1,14 +1,12 @@
-from cvrenderer.utils import *
-import numpy as np
-from cvrenderer.shapes.line import Line
-from cvrenderer.shapes.joint import Joint
-from cvrenderer.scene import Scene
-from cvrenderer.camera import Camera
+from src.cvrenderer.shapes.line import Line
+from src.cvrenderer.scene import Scene
+from src.cvrenderer.camera import Camera
+from src.cvrenderer.shapes.joint import Joint
 
 object_1 = Line(x = 0, y = 0, z = 0.5, length = 1, thickness=2, color=(255, 0, 0))
 object_2 = Line(x = 0, y = 0, z = -0.5, length = 1, thickness=2, color=(0, 255, 0))
 
-# self.fl_j2 = Joint(x = self.body_w/2, y = self.body_l/2+self.l1, z = self.body_initial_height, axis = [0, 1, 0], parent = self.fl_hip, child = self.fl_knee)
+joint = Joint(x = 0.0, y = 0.0, z = 0.0, axis = [0, 1, 0], parent = object_1, child = object_2)
 
 scene_width = 700
 scene_height = 700
@@ -24,6 +22,7 @@ camera = Camera(x = 0, y = 0, z = 20,
 
 scene.add_object(object_1)
 scene.add_object(object_2)
+scene.add_object(joint)
 # scene.add_axis(scaler=1)
 
 scene.add_camera(camera)
@@ -31,6 +30,9 @@ scene.add_camera(camera)
 ang = 0
 while True:
 	k = scene.render_scene()
+	object_2.rotate(ang, ang, ang)
+	object_1.rotate(ang, ang, ang)
+	# joint.rotate(ang, ang, ang)
 	ang += 0.025
 	if k == ord("q"):
 		break

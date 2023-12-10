@@ -1,6 +1,6 @@
-from cvrenderer.shapes.cube import Cube
-from cvrenderer.scene import Scene
-from cvrenderer.camera import Camera
+from src.cvrenderer.shapes.cube import Cube
+from src.cvrenderer.scene import Scene
+from src.cvrenderer.camera import Camera
 
 import numpy as np
 

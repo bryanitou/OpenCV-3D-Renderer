@@ -1,6 +1,6 @@
-from cvrenderer.shapes.read_obj import ReadObj
-from cvrenderer.camera import Camera
-from cvrenderer.scene import Scene
+from src.cvrenderer.shapes.read_obj import ReadObj
+from src.cvrenderer.camera import Camera
+from src.cvrenderer.scene import Scene
 
 import numpy as np
 
@@ -9,7 +9,7 @@ scene_height = 700
 
 scene = Scene(width = scene_width, height = scene_height)
 
-ant = ReadObj("ANT_BLK.OBJ", x_rot=-np.pi/2,scale = 5)
+ant = ReadObj("../../ANT_BLK.OBJ", x_rot=-np.pi / 2, scale = 5)
 camera = Camera(x = 0, y = 0, z = 20,
 				cx = scene_width//2, cy = scene_height//2, 
 				width = scene_width, height = scene_height,

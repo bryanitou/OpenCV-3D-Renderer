@@ -46,7 +46,7 @@ class Joint(Shape):
 		y_rot = (self.current_position )*self.axis[1]
 		z_rot = (self.current_position )*self.axis[2]
 
-		R = get_rotation_matrix(x_rot, y_rot, z_rot)
+		R = get_rotation_matrix(x_rot, y_rot, z_rot, order="xyz")
 		T = np.array([
 			[0],
 			[0],

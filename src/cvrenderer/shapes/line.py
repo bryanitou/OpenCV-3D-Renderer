@@ -9,6 +9,8 @@ class Line(Shape):
 
 		self.name = "LINE"
 		self.color = color
+		self.color_static = color
+		self.grey = (50, 50, 50)
 		self.thickness = thickness
 
 		self.shape_points = np.array([
