@@ -42,11 +42,11 @@ def main():
                   "att1_body", "att2_body", "att3_body", "att1_panel_right", "att2_panel_right", "att3_panel_right"])
 
     # Set scene width
-    scene_width = 700
-    scene_height = 700
+    scene_width = 1000
+    scene_height = 1000
 
     # Rotation being done
-    ang_body_dt = np.array([0.0025, 0.0025, 0.0025]) * 3
+    ang_body_dt = np.array([0.0025, 0.0025, 0.0025])
 
     # Scene
     scene = Scene(width=scene_width, height=scene_height, save_as_video=True)
@@ -55,10 +55,10 @@ def main():
     camera = Camera(x=0, y=0, z=20, cx=scene_width // 2, cy=scene_height // 2,
                     width=scene_width, height=scene_height,
                     x_rot=np.pi / 6, z_rot=4 * np.pi / 3,
-                    fov_x=60, fov_y=60)
+                fov_x=60, fov_y=60)
 
     # Set geometric figures
-    body = Cube(x=0, y=0, z=0, w=3, h=1, l=1, color=(10, 10, 180), thickness=2)
+    body = Cube(x=-3, y=0, z=0, w=3, h=1, l=1, color=(10, 10, 180), thickness=2)
     panel_right = Cube(x=0, y=1, z=0, w=2, h=1, l=0.1, x_rot=0.0, y_rot=0.0, z_rot=0.0, color=(0, 0, 255), thickness=2)
     panel_left = Cube(x=0.0, y=-1, z=0, w=2, h=1, l=0.1, x_rot=0.0, y_rot=0.0, z_rot=0.0, color=(0, 0, 255), thickness=2)
     # panel_right_center_sphere = Sphere(x=panel_right.x, y=panel_right.y, z=panel_right.z, radius=0.1, color=(50, 190, 50))
@@ -101,9 +101,7 @@ def main():
     ang_cam = 0
     idx = 0
     while True:
-        k = scene.render_scene()
-
-        scene.move_axis(delta_x = 0.01, delta_y = -0.01)
+        scene.move_axis(delta_x = -0.01, delta_y = 0.1)
         # camera.rotate(np.pi / 6, 0, ang_cam)
         body.rotate(*(ang_body * body_sgn + body_ang0))
 
@@ -131,9 +129,15 @@ def main():
         # Camera movement
         ang_cam += 0.0025
 
+        # Render scene
+        k = scene.render_scene()
+
         idx += 1
         if k == ord("q"):
             break
+
+        # time.sleep(0.1)
+
 
         # Write in csv
         if idx < 6000:

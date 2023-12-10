@@ -1,21 +1,25 @@
 import cv2
 import numpy as np
-
+import copy
 
 class Draw:
     def __init__(self, width, height, save_as_video=False, window_name="Canvas"):
         self.width = width
         self.height = height
+        img_bck = cv2.imread('backgrounds/earth2.jpeg')
+        imb_bck_resized = cv2.resize(img_bck, (height, width), interpolation = cv2.INTER_AREA)
+        self.image_background = imb_bck_resized
         self.canvas = 255 * np.ones((height, width, 3)).astype("uint8")
         self.window_name = window_name
         self.save_as_video = save_as_video
 
         if self.save_as_video:
-            self.video_writer = cv2.VideoWriter('out/output.avi', cv2.VideoWriter_fourcc(*"MP4V"), 30.0,
+            self.video_writer = cv2.VideoWriter('out/output.mp4', cv2.VideoWriter_fourcc(*"mp4v"), 30.0,
                                                 (self.width, self.height))
 
     def clear(self):
-        self.canvas = 255 * np.ones((self.height, self.width, 3)).astype("uint8")
+        # self.canvas = 255 * np.ones((self.height, self.width, 3)).astype("uint8")
+        self.canvas = copy.deepcopy(self.image_background)
 
     def draw(self, pts, obj, draw_points=False):
         if draw_points:
@@ -73,6 +77,8 @@ class Draw:
             pass
 
     def show(self):
+        # self.canvas[self.image_background.shape[0], self.image_background.shape[1]] = self.image_background
+
         cv2.imshow(self.window_name, self.canvas)
         if self.save_as_video:
             self.video_writer.write(self.canvas)
